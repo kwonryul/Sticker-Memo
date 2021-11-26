@@ -52,7 +52,7 @@ class App {
     }
 
     down(event) {
-        let tmp = new Point(event.clientX, event.clientY);
+        let tmp = new Point(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
 
         for (let i = this.items.length - 1; i >= 0; i--) {
             if (this.items[i].down(tmp)) {
@@ -63,7 +63,7 @@ class App {
     }
 
     move(event) {
-        let tmp = new Point(event.clientX, event.clientY);
+        let tmp = new Point(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
         for (let item of this.items) {
             item.move(tmp);
         }
