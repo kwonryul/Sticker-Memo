@@ -13,6 +13,8 @@ class App {
         for (let i = 0; i < totalItems; i++) {
             this.items.push(new Dialog());
         }
+        
+        this.downs = [];
 
 
         window.addEventListener("touchstart", this.down.bind(this), false);
@@ -52,10 +54,15 @@ class App {
     }
 
     down(event) {
-        let tmp = new Point(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+        let touch = event.changedTouches[0];
+        let tmp = new Point(touch.clientX, touch.clientY);
 
         for (let i = this.items.length - 1; i >= 0; i--) {
+            if (this.items[i].isDown) {
+                continue;
+            }
             if (this.items[i].down(tmp)) {
+                this.downs[touch.identifier] = this.items[i];
                 this.items.push(this.items.splice(i, 1)[0]);
                 break;
             }
@@ -63,16 +70,16 @@ class App {
     }
 
     move(event) {
-        let tmp = new Point(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-        for (let item of this.items) {
-            item.move(tmp);
+        for (let touch of event.changedTouches) {
+            let tmp = new Point(touch.clientX, touch.clientY);
+            this.downs[touch.identifier].move(tmp);
         }
     }
 
     up() {
-        for (let item of this.items) {
-            item.up();
-        }
+        let touch = event.changedTouches[0];
+        this.downs[touch.identifier].up();
+        delete this.downs[touch.identifier];
     }
 }
 
