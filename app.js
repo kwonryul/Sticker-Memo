@@ -15,9 +15,9 @@ class App {
         }
 
 
-        window.addEventListener("touchdown", this.down.bind(this), false);
+        window.addEventListener("touchstart", this.down.bind(this), false);
         window.addEventListener("touchmove", this.move.bind(this), false);
-        window.addEventListener("touchup", this.up.bind(this), false);
+        window.addEventListener("touchend", this.up.bind(this), false);
         window.addEventListener("resize", this.resize.bind(this), false);
         this.resize();
 
