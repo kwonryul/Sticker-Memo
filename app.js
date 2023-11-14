@@ -60,10 +60,12 @@ class App {
                 continue;
             }
             if (this.items[i].down(tmp)) {
+                console.log(this.items[i]);
                 this.downs = this.items[i];
                 this.items.push(this.items.splice(i, 1)[0]);
                 break;
             }
+            console.log("hi");
         }
     }
 
