@@ -53,6 +53,7 @@ class App {
 
     down(event) {
         let touch = event;
+        console.dir(event);
         let tmp = new Point(touch.clientX, touch.clientY);
 
         for (let i = this.items.length - 1; i >= 0; i--) {
