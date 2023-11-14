@@ -4,9 +4,11 @@ import { Dialog } from "./dialog.js";
 const totalItems = 5;
 
 class App {
+    
     constructor() {
         this.canvas = document.createElement("canvas");
         this.ctx = this.canvas.getContext("2d");
+        this.downs = null;
         document.body.appendChild(this.canvas);
 
         this.items = [];
@@ -53,7 +55,6 @@ class App {
 
     down(event) {
         let touch = event;
-        console.log(event);
         let tmp = new Point(touch.clientX, touch.clientY);
 
         for (let i = this.items.length - 1; i >= 0; i--) {
@@ -61,12 +62,10 @@ class App {
                 continue;
             }
             if (this.items[i].down(tmp)) {
-                console.log(this.items[i]);
                 this.downs = this.items[i];
                 this.items.push(this.items.splice(i, 1)[0]);
                 break;
             }
-            console.log("hi");
         }
     }
 
@@ -85,5 +84,4 @@ class App {
 
 window.onload = () => {
     new App();
-    console.log("aa");
 }
